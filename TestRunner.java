@@ -41,6 +41,11 @@ public class TestRunner {
         catch (IllegalArgumentException e) { threwZero = true; }
         check("new(0) -> throws IllegalArgumentException", threwZero);
 
+        // เคสขอบเขต: ความจุ 1 (Boundary)
+        BoundedStack cap1 = new BoundedStack(1);
+        check("new(1) -> size is 0", cap1.size() == 0);
+        check("new(1) -> isFull is false", cap1.isFull() == false);
+
         // เคสขอบเขต: ความจุติดลบ ต้องพัง
         boolean threwNegative = false;
         try { new BoundedStack(-1); }

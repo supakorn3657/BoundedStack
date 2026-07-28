@@ -24,7 +24,7 @@ public class BoundedStack {
     private void checkRep() {
         assert items != null : "items ต้องไม่เป็น null";
         assert capacity > 0 : "capacity ต้องเป็นจำนวนเต็มบวก";
-        assert items.size() <= capacity : "จำนวนข้อมูลเกิน capacity";
+        assert items.size() <= capacity : "จำนวนข้อมูลไม่เกินหรือเท่ากับ capacity";
         for (String item : items) {
             assert item != null : "ห้ามบรรจุค่า null ใน items";
         }
