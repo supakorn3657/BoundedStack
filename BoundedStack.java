@@ -32,7 +32,6 @@ public class BoundedStack {
 
     /**
      * สร้างสแตกใหม่ตามขนาดความจุสูงสุดที่กำหนด
-     * 
      * @param capacity ความจุสูงสุดของสแตก (ต้องมากกว่า 0)
      * @pre capacity > 0
      * @post ได้สแตกว่างที่มีขนาด size เป็น 0
@@ -94,12 +93,32 @@ public class BoundedStack {
         return items.size() == capacity;
     }
 
+/**
+ * ดูข้อมูลที่อยู่บนสุดของสแตกโดยไม่ลบออก
+ * @retrun ข้อความที่อยู่บนสุดของสแตก
+ * @pre สแตกต้องไม่ว่าง (!isEmpty())
+ * @post คืนค่าข้อมูลตำแหน่งบนสุดโดยสถานะและ size ของสแตกไม่เปลี่ยนแปลง
+ * @throws IllegalStateException เมื่อสแตกว่างเปล่า
+ */
     public String peek() {
-        return items.get(items.size() - 1);
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack ว่างเปล่า");
+        }
+    return items.get(items.size() - 1);
     }
 
+    /**
+     * สร้างสแตกจำลอง(Clone)ที่มีขนาดและข้อมูลเหมือนสแตกต้นฉบับ
+     * @return ออบเจ็กต์ BoundedStack ตัวใหม่ที่เป็นอิสระจากสแตกเดิม
+     * @post แการแก้ไขข้อมูลในสแตกใหม่จะไม่ส่งผลกระทบต่อสแตกต้นฉบับ
+     */
     // Producer
     public BoundedStack copy() {
-        return null; // คืนค่าหลอก
+        BoundedStack newStack = new BoundedStack(this.capacity);
+        for (String item : this.items) {
+            newStack.push(item);
+        }
+        checkRep();
+        return newStack;
     }
 }

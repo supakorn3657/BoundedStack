@@ -131,6 +131,3 @@ public class TestRunner {
         check("mutating clone does not affect original", original.size() == 1);
     }
 }
-
-
-
