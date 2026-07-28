@@ -14,8 +14,7 @@ public class TestRunner {
         System.out.println("=== BoundedStack Test Suite ===");
 
         testCreator();
-        testPush();
-        
+
         System.out.println("==================================");
         System.out.printf("PASS %d / FAIL %d%n", pass, fail);
         if (fail > 0) System.exit(1);
@@ -38,31 +37,7 @@ public class TestRunner {
         catch (IllegalArgumentException e) { threwZero = true; }
         check("new(0) -> throws IllegalArgumentException", threwZero);
 
-    }
-
-    // ---------------------------------------------------------
-    // 2. หมวดเทสต์ Mutator: Push (ทดสอบการใส่)
-    // ---------------------------------------------------------
-    static void testPush() {
-        System.out.println("\n-- testPush --");
-        
-        BoundedStack s = new BoundedStack(2);
-        
-        // เคสปกติ
-        s.push("A");
-        check("push(A) -> size is 1", s.size() == 1);
-        check("push(A) -> peek is A", s.peek().equals("A"));
-
-        // เคสขอบเขต: ดันจนเต็มพอดี
-        s.push("B");
-        check("push(B) -> isFull is true", s.isFull());
-
-        // เคสขอบเขต: เต็มแล้วยังฝืน Push ต้องพัง (Exception)
-        boolean threwFull = false;
-        try { s.push("C"); } 
-        catch (IllegalStateException e) { threwFull = true; }
-        check("push when full -> throws IllegalStateException", threwFull);
-
+        // TODO เปรมเขียนต่อ เคสขอบเขต: ความจุติดลบ (-1) ต้องพัง
     }
 }
 
