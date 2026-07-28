@@ -17,6 +17,7 @@ public class TestRunner {
         testPush();
         testPop();
         testObservers();
+        testProducer();
         
         System.out.println("==================================");
         System.out.printf("PASS %d / FAIL %d%n", pass, fail);
@@ -111,6 +112,24 @@ public class TestRunner {
         check("observers have no side effects", s.size() == sizeBefore);
     }
 
+    // ---------------------------------------------------------
+    // 5. หมวดเทสต์ Producer (สร้างใหม่ไม่กวนตัวเก่า)
+    // ---------------------------------------------------------
+    static void testProducer() {
+        System.out.println("\n-- testProducer --");
+        
+        BoundedStack original = new BoundedStack(3);
+        original.push("One");
+        
+        // สร้างตัวโคลน
+        BoundedStack clone = original.copy();
+        
+        check("copy() -> size matches original", clone.size() == original.size());
+        
+        // ลองแก้ตัวโคลน ต้องไม่กระทบตัวจริง
+        clone.push("Two");
+        check("mutating clone does not affect original", original.size() == 1);
+    }
 }
 
 
