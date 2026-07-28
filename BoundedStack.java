@@ -58,6 +58,8 @@ public class BoundedStack {
     
     // Mutators //
     public void push(String item) {
+        if (item == null) {
+            throw new IllegalStateException("ห้ามใส่ค่า null");}
         if (isFull()) {
             throw new IllegalStateException("Stack เต็มแล้ว");}
         items.add(item);
@@ -93,13 +95,13 @@ public class BoundedStack {
         return items.size() == capacity;
     }
 
-/**
- * ดูข้อมูลที่อยู่บนสุดของสแตกโดยไม่ลบออก
- * @retrun ข้อความที่อยู่บนสุดของสแตก
- * @pre สแตกต้องไม่ว่าง (!isEmpty())
- * @post คืนค่าข้อมูลตำแหน่งบนสุดโดยสถานะและ size ของสแตกไม่เปลี่ยนแปลง
- * @throws IllegalStateException เมื่อสแตกว่างเปล่า
- */
+    /**
+    * ดูข้อมูลที่อยู่บนสุดของสแตกโดยไม่ลบออก
+    * @retrun ข้อความที่อยู่บนสุดของสแตก
+    * @pre สแตกต้องไม่ว่าง (!isEmpty())
+    * @post คืนค่าข้อมูลตำแหน่งบนสุดโดยสถานะและ size ของสแตกไม่เปลี่ยนแปลง
+    * @throws IllegalStateException เมื่อสแตกว่างเปล่า
+    */
     public String peek() {
         if (isEmpty()) {
             throw new IllegalStateException("Stack ว่างเปล่า");
