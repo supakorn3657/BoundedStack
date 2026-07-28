@@ -35,7 +35,7 @@ public class TestRunner {
         check("new(5) -> size is 0", s.size() == 0);
         check("new(5) -> isEmpty is true", s.isEmpty());
 
-        // เคสขอบเขต (Boundary): ความจุเป็น 0 ต้องพัง
+        // เคสขอบเขต (Boundary): ความจุเป็น 0
         boolean threwZero = false;
         try { new BoundedStack(0); }
         catch (IllegalArgumentException e) { threwZero = true; }
@@ -46,7 +46,7 @@ public class TestRunner {
         check("new(1) -> size is 0", cap1.size() == 0);
         check("new(1) -> isFull is false", cap1.isFull() == false);
 
-        // เคสขอบเขต: ความจุติดลบ ต้องพัง
+        // เคสขอบเขต: ความจุติดลบ
         boolean threwNegative = false;
         try { new BoundedStack(-1); }
         catch (IllegalArgumentException e) { threwNegative = true; }
