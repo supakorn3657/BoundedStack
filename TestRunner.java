@@ -41,6 +41,12 @@ public class TestRunner {
         catch (IllegalArgumentException e) { threwZero = true; }
         check("new(0) -> throws IllegalArgumentException", threwZero);
 
+        // เคสขอบเขต: ความจุติดลบ ต้องพัง
+        boolean threwNegative = false;
+        try { new BoundedStack(-1); }
+        catch (IllegalArgumentException e) { threwNegative = true; }
+        check("new(-1) -> throws IllegalArgumentException", threwNegative);
+
     }
 
     // ---------------------------------------------------------
@@ -65,6 +71,12 @@ public class TestRunner {
         try { s.push("C"); }
         catch (IllegalStateException e) { threwFull = true; }
         check("push when full -> throws IllegalStateException", threwFull);
+
+        // เคสรับมือ input ผิดปกติ: push(null) ต้องพัง
+        boolean threwNull = false;
+        try { s.push(null); }
+        catch (IllegalArgumentException e) { threwNull = true; }
+        check("push(null) -> throws IllegalArgumentException", threwNull);
 
     }
 
@@ -107,6 +119,13 @@ public class TestRunner {
         s.isEmpty();
         s.isFull();
         s.peek();
+
+        // เคสขอบเขต: peek สแตกว่างต้องโยน Exception
+        BoundedStack emptyStack = new BoundedStack(1);
+        boolean threwPeekEmpty = false;
+        try { emptyStack.peek(); }
+        catch (IllegalStateException e) { threwPeekEmpty = true; }
+        check("peek when empty -> throws IllegalStateException", threwPeekEmpty);
         
         // ตรวจสอบว่าสแตกไม่ได้ถูกแอบเปลี่ยนแปลง
         check("observers have no side effects", s.size() == sizeBefore);
