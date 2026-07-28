@@ -15,6 +15,7 @@ public class TestRunner {
 
         testCreator();
         testPush();
+        testPop();
         
         System.out.println("==================================");
         System.out.printf("PASS %d / FAIL %d%n", pass, fail);
@@ -59,11 +60,37 @@ public class TestRunner {
 
         // เคสขอบเขต: เต็มแล้วยังฝืน Push ต้องพัง (Exception)
         boolean threwFull = false;
-        try { s.push("C"); } 
+        try { s.push("C"); }
         catch (IllegalStateException e) { threwFull = true; }
         check("push when full -> throws IllegalStateException", threwFull);
 
     }
+
+    // ---------------------------------------------------------
+    // 3. หมวดเทสต์ Mutator: Pop (ทดสอบการดึง)
+    // ---------------------------------------------------------
+    static void testPop() {
+        System.out.println("\n-- testPop --");
+        
+        BoundedStack s = new BoundedStack(3);
+        s.push("X"); s.push("Y");
+        
+        // เคสปกติ: หยิบตัวบนสุดออก
+        String top = s.pop();
+        check("pop() -> returns Y", top.equals("Y"));
+        check("pop() -> size decreases to 1", s.size() == 1);
+
+        // เคสขอบเขต: หยิบจนเกลี้ยง
+        s.pop();
+        check("pop() till empty -> isEmpty is true", s.isEmpty());
+
+        // เคสขอบเขต: ว่างแล้วยังฝืน Pop ต้องพัง (Exception)
+        boolean threwEmpty = false;
+        try { s.pop(); } 
+        catch (IllegalStateException e) { threwEmpty = true; }
+        check("pop when empty -> throws IllegalStateException", threwEmpty);
+    }
+
 }
 
 
