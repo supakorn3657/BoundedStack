@@ -16,6 +16,7 @@ public class TestRunner {
         testCreator();
         testPush();
         testPop();
+        testObservers();
         
         System.out.println("==================================");
         System.out.printf("PASS %d / FAIL %d%n", pass, fail);
@@ -89,6 +90,25 @@ public class TestRunner {
         try { s.pop(); } 
         catch (IllegalStateException e) { threwEmpty = true; }
         check("pop when empty -> throws IllegalStateException", threwEmpty);
+    }
+
+    // ---------------------------------------------------------
+    // 4. หมวดเทสต์ Observers (ต้องไม่มี Side Effect)
+    // ---------------------------------------------------------
+    static void testObservers() {
+        System.out.println("\n-- testObservers --");
+        
+        BoundedStack s = new BoundedStack(5);
+        s.push("Test");
+        int sizeBefore = s.size();
+        
+        // เรียก Observer รัวๆ
+        s.isEmpty();
+        s.isFull();
+        s.peek();
+        
+        // ตรวจสอบว่าสแตกไม่ได้ถูกแอบเปลี่ยนแปลง
+        check("observers have no side effects", s.size() == sizeBefore);
     }
 
 }
