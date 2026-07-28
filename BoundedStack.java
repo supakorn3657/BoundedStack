@@ -59,7 +59,7 @@ public class BoundedStack {
     // Mutators //
     public void push(String item) {
         if (item == null) {
-            throw new IllegalStateException("ห้ามใส่ค่า null");}
+            throw new IllegalArgumentException("ห้ามใส่ค่า null");}
         if (isFull()) {
             throw new IllegalStateException("Stack เต็มแล้ว");}
         items.add(item);
@@ -82,15 +82,28 @@ public class BoundedStack {
         return topItem;
     }
 
+    /**
+     * คืนค่าจำนวนข้อมูลที่อยู่ในสแตก
+     * @return จำนวนข้อมูลปัจจุบัน
+     * @post คืนค่าจำนวนสมาชิกในสแตก>= 0 และไม่เกิน capacity
+     */
     // Observers
     public int size() {
         return items.size(); // ปรับคืนค่าจริง เพื่อให้ testCreator() ของเพื่อนผ่าน PASS
     }
 
+    /**
+     * ตรวจสอบว่าสแตกว่างมั้ยย
+     * @return true ถ้าสแตกวไม่มีข้อมูล, false ถ้ามีข้อมูลอย่างน้อย 1 ตัว
+     */
     public boolean isEmpty() {
         return items.isEmpty(); // ปรับคืนค่าจริง เพื่อให้ testCreator() ของเพื่อนผ่าน PASS
     }
 
+    /**
+     * ตรวจสอบว่าสแตกเต็มมั้ยย
+     * @return true ถถ้าจำนวนข้อมูลเท่ากับความจุสูงสุด, false ถ้ายังมีที่ว่าง
+     */
     public boolean isFull() {
         return items.size() == capacity;
     }
