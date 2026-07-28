@@ -47,6 +47,9 @@ public class TestRunner {
         catch (IllegalArgumentException e) { threwNegative = true; }
         check("new(-1) -> throws IllegalArgumentException", threwNegative);
 
+        // เคส กล่องที่เพิ่งสร้างใหม่ ต้องยังไม่เต็มแน่ๆ
+        check("new(5) -> isFull is false", s.isFull() == false);
+
     }
 
     // ---------------------------------------------------------
@@ -77,6 +80,12 @@ public class TestRunner {
         try { s.push(null); }
         catch (IllegalArgumentException e) { threwNull = true; }
         check("push(null) -> throws IllegalArgumentException", threwNull);
+
+        // เคส ลองใส่ของหน้าตาเหมือนเดิมซ้ำลงไป (ใส่ "A" ซ้ำ)
+        BoundedStack sDup = new BoundedStack(3);
+        sDup.push("A");
+        sDup.push("A");
+        check("push duplicate items -> size is 2", sDup.size() == 2);
 
     }
 
@@ -129,6 +138,10 @@ public class TestRunner {
         
         // ตรวจสอบว่าสแตกไม่ได้ถูกแอบเปลี่ยนแปลง
         check("observers have no side effects", s.size() == sizeBefore);
+
+        // เคสที่ ลองเรียก peek() ดูว่าของยังอยู่ครบไหม
+        s.peek();
+        check("peek() doesn't remove item -> size is still 1", s.size() == 1);
     }
 
     // ---------------------------------------------------------

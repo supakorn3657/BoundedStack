@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class BoundedStack {
     
-    /*      //////  6821601178 ปริวัฒน์ สุขวิจิตต์  //////
+    /**
      * Abstraction Function (AF):
      *   AF(items, capacity) = Stack ขนาดจำกัดที่มีความจุสูงสุดเท่ากับ 'capacity'
      *   - items.get(0) คือข้อมูลที่อยู่ล่างสุดของ Stack (Bottom)
@@ -125,7 +125,7 @@ public class BoundedStack {
     /**
      * สร้างสแตกจำลอง(Clone)ที่มีขนาดและข้อมูลเหมือนสแตกต้นฉบับ
      * @return ออบเจ็กต์ BoundedStack ตัวใหม่ที่เป็นอิสระจากสแตกเดิม
-     * @post แการแก้ไขข้อมูลในสแตกใหม่จะไม่ส่งผลกระทบต่อสแตกต้นฉบับ
+     * @post การแก้ไขข้อมูลในสแตกใหม่จะไม่ส่งผลกระทบต่อสแตกต้นฉบับ
      */
     // Producer
     public BoundedStack copy() {
