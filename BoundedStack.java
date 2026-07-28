@@ -65,8 +65,20 @@ public class BoundedStack {
         checkRep();
     }
 
+    /**
+     * ดึงข้อมูลที่อยู่บนสุดของสแตกออกมาและคืนค่าข้อมูลนั้น
+     * @return ข้อความตที่อยู่บนสุดของสแตกออกและคืนค่าข้อมูลนั้น
+     * @pre สแตกต้องไม่ว่าง (!isEmpty())
+     * @post ข้อมูลบนสุดของสแตกจะถูกลบออก และ size ของสแตกจะลดลง 1
+     * @throws IllegalStateException เมื่อสแตกว่างเปล่า ไม่สามารถ pop ได้
+     */
     public String pop() {
-        return null; // คืนค่าหลอก
+        if(isEmpty()) {
+            throw new IllegalStateException("Stack ว่างเปล่า");
+        }
+        String topItem = items.remove(items.size() - 1);
+        checkRep();
+        return topItem;
     }
 
     // Observers
