@@ -48,9 +48,21 @@ public class BoundedStack {
         checkRep();
     }
 
-    // Mutators
+    /**
+    * นำข้อมูล item ใส่ลงไปในตำแหน่งบนสุดของสแตก
+    * @param item ข้อความที่ต้องการใส่ลงในสแตก (ต้องไม่เป็น null)
+    * @pre สแตกต้องยังไม่เต็ม (size < capacity) และ item != null
+    * @post ข้อมูล item จะอยู่บนสุดของสแตก และ size ของสแตกจะเพิ่มขึ้น 1
+    * @throws IllegalStateException เมื่อสแตกเต็มแล้ว
+    * @throws IllegalArgumentException เมื่อ item เป็น null
+    */
+    
+    // Mutators //
     public void push(String item) {
-        // โครงเปล่า
+        if (isFull()) {
+            throw new IllegalStateException("Stack เต็มแล้ว");}
+        items.add(item);
+        checkRep();
     }
 
     public String pop() {
@@ -67,11 +79,11 @@ public class BoundedStack {
     }
 
     public boolean isFull() {
-        return true; // คืนค่าหลอก
+        return items.size() == capacity;
     }
 
     public String peek() {
-        return null; // คืนค่าหลอก
+        return items.get(items.size() - 1);
     }
 
     // Producer
