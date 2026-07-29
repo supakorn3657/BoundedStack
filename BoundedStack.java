@@ -16,7 +16,7 @@ public class BoundedStack {
      *   - items ต้องไม่บรรจุค่า null (items.get(i) != null ทุกตำแหน่ง)
      */
     private ArrayList<String> items;
-    private int capacity;
+    private final int capacity;
 
     /**
      * Helper method ตรวจสอบ Rep Invariant
@@ -59,22 +59,24 @@ public class BoundedStack {
     // Mutators //
     public void push(String item) {
         if (item == null) {
-            throw new IllegalArgumentException("ห้ามใส่ค่า null");}
+            throw new IllegalArgumentException("ห้ามใส่ค่า null");
+        }
         if (isFull()) {
-            throw new IllegalStateException("Stack เต็มแล้ว");}
+            throw new IllegalStateException("Stack เต็มแล้ว");
+        }
         items.add(item);
         checkRep();
     }
 
     /**
      * ดึงข้อมูลที่อยู่บนสุดของสแตกออกมาและคืนค่าข้อมูลนั้น
-     * @return ข้อความตที่อยู่บนสุดของสแตกออกและคืนค่าข้อมูลนั้น
+     * @return ข้อความที่อยู่บนสุดของสแตกออกและคืนค่าข้อมูลนั้น
      * @pre สแตกต้องไม่ว่าง (!isEmpty())
      * @post ข้อมูลบนสุดของสแตกจะถูกลบออก และ size ของสแตกจะลดลง 1
      * @throws IllegalStateException เมื่อสแตกว่างเปล่า ไม่สามารถ pop ได้
      */
     public String pop() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             throw new IllegalStateException("Stack ว่างเปล่า");
         }
         String topItem = items.remove(items.size() - 1);
@@ -93,16 +95,16 @@ public class BoundedStack {
     }
 
     /**
-     * ตรวจสอบว่าสแตกว่างมั้ยย
-     * @return true ถ้าสแตกวไม่มีข้อมูล, false ถ้ามีข้อมูลอย่างน้อย 1 ตัว
+     * ตรวจสอบว่าสแตกว่างมั้ย
+     * @return true ถ้าสแตกไม่มีข้อมูล, false ถ้ามีข้อมูลอย่างน้อย 1 ตัว
      */
     public boolean isEmpty() {
         return items.isEmpty(); // ปรับคืนค่าจริง เพื่อให้ testCreator() ของเพื่อนผ่าน PASS
     }
 
     /**
-     * ตรวจสอบว่าสแตกเต็มมั้ยย
-     * @return true ถถ้าจำนวนข้อมูลเท่ากับความจุสูงสุด, false ถ้ายังมีที่ว่าง
+     * ตรวจสอบว่าสแตกเต็มมั้ย
+     * @return true ถ้าจำนวนข้อมูลเท่ากับความจุสูงสุด, false ถ้ายังมีที่ว่าง
      */
     public boolean isFull() {
         return items.size() == capacity;
@@ -110,7 +112,7 @@ public class BoundedStack {
 
     /**
     * ดูข้อมูลที่อยู่บนสุดของสแตกโดยไม่ลบออก
-    * @retrun ข้อความที่อยู่บนสุดของสแตก
+    * @return ข้อความที่อยู่บนสุดของสแตก
     * @pre สแตกต้องไม่ว่าง (!isEmpty())
     * @post คืนค่าข้อมูลตำแหน่งบนสุดโดยสถานะและ size ของสแตกไม่เปลี่ยนแปลง
     * @throws IllegalStateException เมื่อสแตกว่างเปล่า
@@ -119,7 +121,7 @@ public class BoundedStack {
         if (isEmpty()) {
             throw new IllegalStateException("Stack ว่างเปล่า");
         }
-    return items.get(items.size() - 1);
+        return items.get(items.size() - 1);
     }
 
     /**
