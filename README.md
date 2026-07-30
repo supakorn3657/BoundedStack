@@ -92,8 +92,6 @@
 ระบบมาพร้อมกับ `TestRunner` สำหรับทดสอบความถูกต้องของการทำงานโดยอัตโนมัติ การรันโปรแกรมทดสอบจำเป็นต้องเปิดใช้งานแฟล็ก `-ea` (Enable Assertions) เพื่อให้กลไกตรวจสอบ Representation Invariant (`checkRep`) ทำงานได้อย่างสมบูรณ์
 
 ```bash
-# 1. คอมไพล์ซอร์สโค้ด
-javac BoundedStack.java TestRunner.java
-
-# 2. รันโปรแกรมทดสอบพร้อมเปิดใช้งานระบบ Assertion
-java -ea TestRunner
+{
+  "java.debug.settings.vmArgs": "-ea"
+}
